@@ -49,6 +49,11 @@ class SeedController extends Controller
     public function actionMongo($logs = 3000)
     {
         $col = \Yii::$app->mongodb->getCollection('user_activity_logs');
+        $col->createIndex(
+            ['action' => 1, 'created_at' => 1, 'user_id' => 1],
+            ['partialFilterExpression' => ['action' => 'view_product']]
+        );
+
         $this->stdout("Seeding Mongo: {$logs} logs\n", Console::FG_GREEN);
 
         $col->remove([]);

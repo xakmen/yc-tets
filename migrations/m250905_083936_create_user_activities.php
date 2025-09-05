@@ -15,12 +15,21 @@ class m250905_083936_create_user_activities extends Migration
               user_id INT NOT NULL,
               activity_type ENUM('banner_click','promo_view','message_read') NOT NULL,
               activity_data TEXT NULL,
-              created_at DATETIME NOT NULL,
-              KEY idx_user_activities_user_created (user_id, created_at),
-              KEY idx_user_activities_created (created_at)
+              created_at DATETIME NOT NULL
             ) ENGINE=InnoDB
               DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
         ");
+
+        $this->createIndex(
+            'idx_user_activities_user_created',
+            'user_activities',
+            ['user_id', 'created_at']
+        );
+        $this->createIndex(
+            'idx_user_activities_created',
+            'user_activities',
+            'created_at'
+        );
     }
 
     /**
