@@ -26,6 +26,10 @@ $config = [
             ],
         ],
         'db' => $db,
+        'mongodb' => [
+            'class' => \yii\mongodb\Connection::class,
+            'dsn' => 'mongodb://root:secret@127.0.0.1:27017/test_db?authSource=admin',
+        ],
     ],
     'params' => $params,
     /*
